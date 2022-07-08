@@ -68,7 +68,7 @@ function draw() {
  
   if (counter < rAVG && counter % 5 == 0) {
     renewColors();
-    drawTree(width / 2, height, PI / 2, baseLength);
+    drawTree(floor(random(width)), height, PI / 2, baseLength);
   } else if (counter > rAVG && checkFirst == 1) {
     counter = 0;
     background(120);
