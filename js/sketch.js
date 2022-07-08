@@ -20,6 +20,10 @@ let songs;
 let sounds = [];
 let currentSound;
 
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
+
 function preload() {
   loadStrings("assets/songlist.txt", setSongs);
 }
