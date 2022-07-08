@@ -43,7 +43,7 @@ function setup() {
   currentSound.amp(0.2);
   renewColors()
   background(120);
-  playSong();
+  //playSong();
   beat = millis();
   currentSound.play();
 
@@ -110,6 +110,7 @@ function drawLeaves(x, y) {
 
 // generate a tree from any place the mouse is clicked
 function mouseClicked() {
+  playSong();
   renewColors();
   drawTree(mouseX, mouseY, PI / 2, baseLength);
 }
