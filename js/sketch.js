@@ -21,7 +21,7 @@ let sounds = [];
 let currentSound;
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  resizeCanvas(windowWidth-40, windowHeight-50);
 }
 
 function preload() {
@@ -38,7 +38,7 @@ function setSongs(result) {
 function setup() {
 
   currentSound = sounds[floor(random(0, sounds.length))];
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(windowWidth-40, windowHeight-50);
   fft = new p5.FFT();
   currentSound.amp(0.2);
   renewColors()
@@ -69,7 +69,7 @@ function draw() {
   }
   spectrum = fft.analyze();
   analyzeSong();
-  drawSpectrumGraph(0, 0, width, height);
+  drawSpectrumGraph();
   counter++;
   playSong();
 }
@@ -151,7 +151,7 @@ function analyzeSong() {
 
 let i = 0;
 // Graphing code adapted from https://jankozeluh.g6.cz/index.html by Jan Koželuh
-function drawSpectrumGraph(left, top, w, h) {
+function drawSpectrumGraph() {
  
   let peak = 0;
   // compute a running average of values to avoid very
