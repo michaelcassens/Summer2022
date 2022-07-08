@@ -13,7 +13,7 @@ let beat;
 const threshold = 0.4;
 const avgWindow = 20;
 let lastPeak;
-let rAVG;
+let rAVG = 0;
 let spectrum;
 let counter = 0;
 let songs;
@@ -46,6 +46,12 @@ function setup() {
   //playSong();
   beat = millis();
   //currentSound.play();
+  //fill(255,255,255);
+  textSize(32);
+  let message = "Press to Start";
+  let messageWidth = textWidth(message);
+  textAlign(CENTER);
+  text(message,width/2, height/2);
 
 }
 
@@ -63,9 +69,10 @@ function draw() {
   if (counter < rAVG && counter % 5 == 0) {
     renewColors();
     drawTree(width / 2, height, PI / 2, baseLength);
-  } else if (counter > rAVG) {
+  } else if (counter > rAVG && checkFirst == 1) {
     counter = 0;
     background(120);
+    
   }
   spectrum = fft.analyze();
   analyzeSong();
