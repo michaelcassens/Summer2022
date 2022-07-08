@@ -1,0 +1,13 @@
+assets/ColdHeart.mp3
+assets/DejaVu.mp3
+assets/DontGiveUpOnMe.mp3
+assets/EverythingIWanted.mp3
+assets/GuidingLight.mp3
+assets/HarmonyHall.mp3
+assets/ISeeYou.mp3
+assets/JustExist.mp3
+assets/LeaveBeforeYouLoveMe.mp3
+assets/PostHumorous.mp3
+assets/RiseUp.mp3
+assets/Superposition.mp3
+assets/ThisIsMe.mp3
