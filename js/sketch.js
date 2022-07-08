@@ -131,7 +131,7 @@ function mouseClicked() {
 // consolidated the changes into a function for reusability
 function renewColors() {
   leafDensity = random(0, 3);
-  leafColor = color(random(0, x), random(0, x), random(0, x));
+  leafColor = color(random(0, x/3), random(0, x/2), random(0, x/4));
   baseLength = random(height / 10, height / 4);
   minLength = random(1, 12);
   lengthRatio = random(0.25, 0.75);
