@@ -19,7 +19,7 @@ let counter = 0;
 let songs;
 let sounds = [];
 let currentSound;
-
+let checkFirst = 0;
 function windowResized() {
   resizeCanvas(windowWidth-40, windowHeight-50);
 }
@@ -45,7 +45,7 @@ function setup() {
   background(120);
   //playSong();
   beat = millis();
-  currentSound.play();
+  //currentSound.play();
 
 }
 
@@ -71,7 +71,12 @@ function draw() {
   analyzeSong();
   drawSpectrumGraph();
   counter++;
-  playSong();
+  if(checkFirst == 1)
+  {
+    //console.log("HI");
+    playSong();
+
+  }
 }
 
 /* adapted from the following
@@ -111,6 +116,7 @@ function drawLeaves(x, y) {
 // generate a tree from any place the mouse is clicked
 function mouseClicked() {
   playSong();
+  checkFirst = 1;
   renewColors();
   drawTree(mouseX, mouseY, PI / 2, baseLength);
 }
