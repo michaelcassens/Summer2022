@@ -22,6 +22,7 @@ let currentSound;
 let checkFirst = 0;
 var w1 = window.innerWidth;
 var h1 = window.innerHeight; 
+let button;
 
 function windowResized() {
   background(120);
@@ -53,19 +54,32 @@ function setup() {
   //currentSound.play();
   //fill(255,255,255);
  
-
+  if(checkFirst == 0)
+  {
+    button = createButton('Play');
+    textAlign(CENTER)
+    //button.position(width/2, height/2);
+    button.position(20, 20);
+    button.size(75,50);
+    button.mousePressed(changePlay);
+  //  textSize(32);
+  //  let message = "Press to Start";
+  //  textAlign(CENTER);
+   // text(message,width/2, height/2);
+  }
 }
 
 function playSong() {
 
-  if (!currentSound.isPlaying()) {
-    currentSound = sounds[floor(random(sounds.length))];
+  if (!currentSound.isPlaying() && checkFirst == 1) {
+currentSound = sounds[floor(random(sounds.length))];
     currentSound.play();
   }
 
 }
 
 function draw() {
+  
   
   if (counter < rAVG && counter % 5 == 0) {
     renewColors();
@@ -85,14 +99,7 @@ function draw() {
     playSong();
 
   }
-  else if(checkFirst == 0)
-  {
-    textSize(32);
-    let message = "Press to Start";
-    let messageWidth = textWidth(message);
-    textAlign(CENTER);
-    text(message,width/2, height/2);
-  }
+  
   push();
   fill(0, 0, 0);
   noStroke();
@@ -140,8 +147,8 @@ function drawLeaves(x, y) {
 
 // generate a tree from any place the mouse is clicked
 function mouseClicked() {
-  playSong();
-  checkFirst = 1;
+ // playSong();
+  //checkFirst = 1;
   renewColors();
   drawTree(mouseX, mouseY, PI / 2, baseLength);
 }
@@ -206,5 +213,25 @@ function drawSpectrumGraph() {
   }
   lastPeak = peak;
   rAVG = runningAvg;
+  
+}
+
+function changePlay()
+{
+  if(button.html() == "Play")
+  {
+    background(120);
+    button.html("Pause");
+    playSong();
+    checkFirst = 1;
+  }
+  else if(button.html() == "Pause")
+  {
+    
+    background(120);
+    button.html("Play");
+    currentSound.pause(); 
+    checkFirst = 0;
+  }
   
 }
