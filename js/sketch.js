@@ -20,8 +20,12 @@ let songs;
 let sounds = [];
 let currentSound;
 let checkFirst = 0;
+var w1 = window.innerWidth;
+var h1 = window.innerHeight; 
+
 function windowResized() {
-  resizeCanvas(windowWidth-40, windowHeight-50);
+  background(120);
+  resizeCanvas(w1,h1);
 }
 
 function preload() {
@@ -38,7 +42,8 @@ function setSongs(result) {
 function setup() {
 
   currentSound = sounds[floor(random(0, sounds.length))];
-  createCanvas(windowWidth-40, windowHeight-50);
+  createCanvas(w1, h1);
+  //fullscreen(true);
   fft = new p5.FFT();
   currentSound.amp(0.2);
   renewColors()
@@ -47,11 +52,7 @@ function setup() {
   beat = millis();
   //currentSound.play();
   //fill(255,255,255);
-  textSize(32);
-  let message = "Press to Start";
-  let messageWidth = textWidth(message);
-  textAlign(CENTER);
-  text(message,width/2, height/2);
+ 
 
 }
 
@@ -65,7 +66,7 @@ function playSong() {
 }
 
 function draw() {
- 
+  
   if (counter < rAVG && counter % 5 == 0) {
     renewColors();
     drawTree(floor(random(width)), height, PI / 2, baseLength);
@@ -84,6 +85,23 @@ function draw() {
     playSong();
 
   }
+  else if(checkFirst == 0)
+  {
+    textSize(32);
+    let message = "Press to Start";
+    let messageWidth = textWidth(message);
+    textAlign(CENTER);
+    text(message,width/2, height/2);
+  }
+  push();
+  fill(0, 0, 0);
+  noStroke();
+  //rect(20, 20, w1-40, h1-40);
+  rect(20, 0, w1-40, 20);
+  rect(0, 0, 20, h1-20);
+  rect(0, h1-20, w1-20, 20);
+  rect(w1-20, 0, w1, h1);
+  pop();
 }
 
 /* adapted from the following
