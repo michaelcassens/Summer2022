@@ -23,10 +23,11 @@ let checkFirst = 0;
 var w1 = window.innerWidth;
 var h1 = window.innerHeight; 
 let button;
-
+let textMessage = "Play";
 function windowResized() {
+  resizeCanvas(window.innerWidth,window.innerHeight);
   background(120);
-  resizeCanvas(w1,h1);
+  
 }
 
 function preload() {
@@ -56,12 +57,12 @@ function setup() {
  
   if(checkFirst == 0)
   {
-    button = createButton('Play');
-    textAlign(CENTER)
+ //   button = createButton('Play');
+ //   textAlign(CENTER)
     //button.position(width/2, height/2);
-    button.position(20, 20);
-    button.size(75,50);
-    button.mousePressed(changePlay);
+ //   button.position(20, 120);
+ //   button.size(75,50);
+  //  button.mousePressed(changePlay);
   //  textSize(32);
   //  let message = "Press to Start";
   //  textAlign(CENTER);
@@ -109,6 +110,16 @@ function draw() {
   rect(0, h1-20, w1-20, 20);
   rect(w1-20, 0, w1, h1);
   pop();
+
+  push();
+  fill(0);
+  stroke(0, 0, 0);
+  bezier(20,20,width/3,100, width*2/3, 40, width,20);
+  fill(255);
+  textSize(28);
+  textAlign(CENTER);
+  text(textMessage, width/2-50, 40);
+  pop();
 }
 
 /* adapted from the following
@@ -149,6 +160,11 @@ function drawLeaves(x, y) {
 function mouseClicked() {
  // playSong();
   //checkFirst = 1;
+ // console.log("mouseX: " + mouseX + ": mouseY:" + mouseY + ":" + floor(width/2)-50);
+  if(mouseX >= floor(width/2)-90 && mouseX < floor(width/2) + 70 && mouseY >= 10 && mouseY < 70)
+  {
+    changePlay();
+  }
   renewColors();
   drawTree(mouseX, mouseY, PI / 2, baseLength);
 }
@@ -218,18 +234,22 @@ function drawSpectrumGraph() {
 
 function changePlay()
 {
-  if(button.html() == "Play")
+  //if(button.html() == "Play")
+  if(textMessage == "Play")
   {
     background(120);
-    button.html("Pause");
+   // button.html("Pause");
+   textMessage = "Pause";
     playSong();
     checkFirst = 1;
   }
-  else if(button.html() == "Pause")
+  //else if(button.html() == "Pause")
+  else if(textMessage == "Pause")
   {
     
     background(120);
-    button.html("Play");
+    //button.html("Play");
+    textMessage = "Play";
     currentSound.pause(); 
     checkFirst = 0;
   }
