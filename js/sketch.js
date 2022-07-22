@@ -24,10 +24,12 @@ var w1 = window.innerWidth;
 var h1 = window.innerHeight; 
 let button;
 let textMessage = "Play";
+let distribution = [];
+let localY = 0;
 function windowResized() {
   resizeCanvas(window.innerWidth,window.innerHeight);
-  background(120);
-  
+  setBackground();
+  createDistribution();
 }
 
 function preload() {
@@ -42,14 +44,14 @@ function setSongs(result) {
 }
 
 function setup() {
-
+  createDistribution();
   currentSound = sounds[floor(random(0, sounds.length))];
   createCanvas(w1, h1);
   //fullscreen(true);
   fft = new p5.FFT();
   currentSound.amp(0.2);
   renewColors()
-  background(120);
+  setBackground();
   //playSong();
   beat = millis();
   //currentSound.play();
@@ -87,7 +89,7 @@ function draw() {
     drawTree(floor(random(width)), height, PI / 2, baseLength);
   } else if (counter > rAVG && checkFirst == 1) {
     counter = 0;
-    background(120);
+    setBackground();
     
   }
   spectrum = fft.analyze();
@@ -120,6 +122,8 @@ function draw() {
   textAlign(CENTER);
   text(textMessage, width/2-50, 40);
   pop();
+ 
+ // y2+=random(1,10);
 }
 
 /* adapted from the following
@@ -144,15 +148,19 @@ function drawTree(x, y, angle, length) {
 https://spin.atomicobject.com/2022/04/26/generative-art-recursion/
 */
 function drawLeaves(x, y) {
+  
   push();
-
   fill(leafColor);
   noStroke();
-
+  
+  // altered to create a more leaf type
   for (let i = 0; i < leafDensity; i++) {
-    circle(randomGaussian(x, 10), randomGaussian(y, 10), random(2, 5));
+    ellipse(randomGaussian(x, 15), randomGaussian(y, 20), random(2, 5),random(1, 10));
+ //  ellipse(x, localY, random(2, 5),random(1, 10));
+     
+   
   }
-
+ 
   pop();
 }
 
@@ -171,11 +179,11 @@ function mouseClicked() {
 
 // consolidated the changes into a function for reusability
 function renewColors() {
-  leafDensity = random(0, 3);
+  leafDensity = random(0, 5);
   leafColor = color(random(0, x/3), random(0, x/2), random(0, x/4));
   baseLength = random(height / 10, height / 4);
   minLength = random(1, 12);
-  lengthRatio = random(0.25, 0.75);
+  lengthRatio = random(0.25, 0.65);
   angleChange = random(PI / 24, PI/6 );
 }
 
@@ -237,7 +245,7 @@ function changePlay()
   //if(button.html() == "Play")
   if(textMessage == "Play")
   {
-    background(120);
+    setBackground();
    // button.html("Pause");
    textMessage = "Pause";
     playSong();
@@ -247,11 +255,23 @@ function changePlay()
   else if(textMessage == "Pause")
   {
     
-    background(120);
+    setBackground();
     //button.html("Play");
     textMessage = "Play";
     currentSound.pause(); 
     checkFirst = 0;
   }
   
+}
+
+function createDistribution()
+{
+ // for (let i = 0; i < 10; i++) {
+ //   distribution[i] = floor(randomGaussian() * 60); 
+ // }
+}
+
+function setBackground()
+{
+  background(38,54,38);
 }
