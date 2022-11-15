@@ -26,10 +26,12 @@ let button;
 let textMessage = "Play";
 let distribution = [];
 let localY = 0;
+let rainDrops = [];
+
 function windowResized() {
   resizeCanvas(window.innerWidth,window.innerHeight);
   setBackground();
-  createDistribution();
+  
 }
 
 function preload() {
@@ -44,7 +46,7 @@ function setSongs(result) {
 }
 
 function setup() {
-  createDistribution();
+ 
   currentSound = sounds[floor(random(0, sounds.length))];
   createCanvas(w1, h1);
   //fullscreen(true);
@@ -82,7 +84,7 @@ currentSound = sounds[floor(random(sounds.length))];
 }
 
 function draw() {
-  
+  fallingRain();
   
   if (counter < rAVG && counter % 5 == 0) {
     renewColors();
@@ -264,11 +266,12 @@ function changePlay()
   
 }
 
-function createDistribution()
+function fallingRain()
 {
- // for (let i = 0; i < 10; i++) {
- //   distribution[i] = floor(randomGaussian() * 60); 
- // }
+   for(let i = 0; i < 100; i++)
+   {
+    rainDrops[i] = circle(random(100), random(100), 3);
+   }
 }
 
 function setBackground()
