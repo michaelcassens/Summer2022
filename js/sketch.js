@@ -84,7 +84,7 @@ currentSound = sounds[floor(random(sounds.length))];
 }
 
 function draw() {
-  fallingRain();
+  //fallingRain();
   
   if (counter < rAVG && counter % 5 == 0) {
     renewColors();
